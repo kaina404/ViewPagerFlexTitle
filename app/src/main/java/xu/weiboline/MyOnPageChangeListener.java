@@ -79,6 +79,7 @@ public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
             lastPosition = pager.getCurrentItem();
         }
         Log.d(TAG, "state = " + state);
+
     }
 
     public int getScreenWidth(Activity activity) {
