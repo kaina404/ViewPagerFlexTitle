@@ -1,6 +1,5 @@
 package xu.weiboline;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,12 +7,11 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
-import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Scroller;
-import android.widget.TextView;
+
+import static xu.weiboline.Tool.getScreenWidth;
 
 /**
  * Created by lovexujh on 2017/6/30
@@ -49,18 +47,11 @@ public class DynamicLine extends View {
     private void init() {
         paint = new Paint();
         paint.setAntiAlias(true);
-//        paint.setColor(getResources().getColor(R.color.colorAccent));
         paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(5);
-        paint.setShader(new LinearGradient(0, 100, getScreenWidth((Activity) getContext()), 100, Color.parseColor("#ffc125"), Color.parseColor("#ff4500"), Shader.TileMode.MIRROR));
+        paint.setShader(new LinearGradient(0, 100, getScreenWidth(getContext()), 100, Color.parseColor("#ffc125"), Color.parseColor("#ff4500"), Shader.TileMode.MIRROR));
 
         scroller = new Scroller(getContext());
-    }
-
-    public int getScreenWidth(Activity activity) {
-        DisplayMetrics dm = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        return dm.widthPixels;
     }
 
 
@@ -84,8 +75,6 @@ public class DynamicLine extends View {
         invalidate();
     }
 
-
-    //int startX, int startY, int dx, int dy, int duration
     public void setLocation(int location1, int location2, int location3, boolean defaultScrooll) {
         sportL = 0;
         this.defaultScrooll = defaultScrooll;
@@ -104,17 +93,6 @@ public class DynamicLine extends View {
         }
 
 
-       /* this.startX = startX;
-        this.stopX = viewStopX;
-        this.viewStopX = lastLineWidth;
-        this.defaultScrooll = defaultScrooll;
-        if (defaultScrooll) {
-            scroller.startScroll(startX, 0, lastLineWidth, 0, 2000);
-
-        } else {
-            scroller.startScroll(startX + lastLineWidth, 0, lastLineWidth, 0, 2000);
-
-        }*/
         invalidate();//这里必须调用invalidate()才能保证computeScroll()会被调用，否则不一定会刷新界面，看不到滚动效果
     }
 
@@ -125,9 +103,6 @@ public class DynamicLine extends View {
         //先判断mScroller滚动是否完成
         if (scroller.computeScrollOffset()) {
             //这里调用View的scrollTo()完成实际的滚动
-//            scrollTo(scroller.getCurrX(), scroller.getCurrY());
-//            Log.d("datarts", startX + "===" + stopX);
-
             if (defaultScrooll) {
                 startX = scroller.getCurrX();
             } else {
@@ -141,10 +116,5 @@ public class DynamicLine extends View {
         }
     }
 
-    public static float getTextViewLength(TextView textView, String text) {
-        TextPaint paint = textView.getPaint();
-        // 得到使用该paint写上text的时候,像素为多少
-        return paint.measureText(text);
-    }
 
 }

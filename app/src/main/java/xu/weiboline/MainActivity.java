@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
 //    private MyOnPageChangeListener onPageChangeListener;
     private DynamicLine dynamicLine;
     private ViewPagerTitle viewPagerTitle;
+    private View view4;
+    private View view5;
+    private View view6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 //        dynamicLine = (DynamicLine)findViewById(R.id.line);
 
         pager = (ViewPager) findViewById(R.id.view_pager);
-        viewPagerTitle.initData(new String[]{"layout1", "layout2", "layout3"}, pager, 0);
+        viewPagerTitle.initData(new String[]{"layout1", "layout2", "layout3", "layout4", "layout5", "layout6"}, pager, 0);
 
 //        onPageChangeListener = new MyOnPageChangeListener(pager, dynamicLine);
 
@@ -46,11 +49,17 @@ public class MainActivity extends AppCompatActivity {
         view1 = inflater.inflate(R.layout.layout1, null);
         view2 = inflater.inflate(R.layout.layout2, null);
         view3 = inflater.inflate(R.layout.layout3, null);
+        view4 = inflater.inflate(R.layout.layout4, null);
+        view5 = inflater.inflate(R.layout.layout5, null);
+        view6 = inflater.inflate(R.layout.layout6, null);
 
         views = new ArrayList<>();
         views.add(view1);
         views.add(view2);
         views.add(view3);
+        views.add(view4);
+        views.add(view5);
+        views.add(view6);
 
 //        pager.addOnPageChangeListener(onPageChangeListener);
 
