@@ -33,7 +33,6 @@ public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
     private int[] location = new int[2];
 
 
-
     public MyOnPageChangeListener(Context context, ViewPager viewPager, DynamicLine dynamicLine, ViewPagerTitle viewPagerTitle, int allLength, int margin) {
         this.viewPagerTitle = viewPagerTitle;
         this.pager = viewPager;
@@ -41,24 +40,21 @@ public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
         this.context = context;
         textViews = viewPagerTitle.getTextView();
         pagerCount = textViews.size();
-//        screenWidth = getScreenWidth(context);
         screenWidth = getScreenWidth(context);
 
         lineWidth = (int) getTextViewLength(textViews.get(0));
 
         everyLength = allLength / pagerCount;
-//        dis = Math.max((everyLength - lineWidth) / 2, 20);
         dis = margin;
 
     }
-
 
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
         if (lastPosition > position) {
-            Log.d(TAG, "lastPosition < position positionOffset = " + positionOffset + "][position=" + position+"][ locationtm 0 = ");
+            Log.d(TAG, "lastPosition < position positionOffset = " + positionOffset + "][position=" + position + "][ locationtm 0 = ");
 
             dynamicLine.updateView((position + positionOffset) * everyLength + dis, (lastPosition + 1) * everyLength - dis);
 
@@ -82,13 +78,14 @@ public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
     }
 
 
-
     @Override
     public void onPageScrollStateChanged(int state) {
+        boolean scrollRight;//页面向右
         if (state == SCROLL_STATE_SETTLING) {
+            scrollRight = lastPosition < pager.getCurrentItem();
             lastPosition = pager.getCurrentItem();
-            if (lastPosition + 1 < textViews.size()) {
-                textViews.get(lastPosition + 1).getLocationOnScreen(location);
+            if (lastPosition + 1 < textViews.size() && lastPosition - 1 >= 0) {
+                textViews.get(scrollRight ? lastPosition + 1 : lastPosition - 1).getLocationOnScreen(location);
                 if (location[0] > screenWidth) {
                     viewPagerTitle.smoothScrollBy(screenWidth / 2, 0);
                 } else if (location[0] < 0) {
