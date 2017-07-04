@@ -18,7 +18,7 @@ public class Tool {
         return paint.measureText(textView.getText().toString());
     }
 
-    public static float getTextViewLength(TextView textView, int textSize) {
+    public static float getTextViewLength(TextView textView, float textSize) {
         TextPaint paint = textView.getPaint();
         paint.setTextSize(textSize);
         return paint.measureText(textView.getText().toString());
