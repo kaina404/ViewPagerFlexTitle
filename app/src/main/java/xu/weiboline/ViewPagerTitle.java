@@ -32,12 +32,13 @@ public class ViewPagerTitle extends HorizontalScrollView {
     private int margin;
     private LinearLayout.LayoutParams contentParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     private LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-    private int length;
+    //    private int length;
     private int defaultIndex;
     private float defaultTextSize = 18;
     private float selectedTextSize = 25;
     private int defaultTextColor = Color.GRAY;
     private int selectedTextColor = Color.BLACK;
+    private int allTextViewLength;
 
 
     public ViewPagerTitle(Context context) {
@@ -63,11 +64,23 @@ public class ViewPagerTitle extends HorizontalScrollView {
         this.viewPager = viewPager;
         createDynamicLine();
         createTextViews(titles);
+
+        int fixLeftDis = getFixLeftDis();
+        onPageChangeListener = new MyOnPageChangeListener(getContext(), viewPager, dynamicLine, this, allTextViewLength, margin, fixLeftDis);
         setDefaultIndex(defaultIndex);
 
-        onPageChangeListener = new MyOnPageChangeListener(getContext(), viewPager, dynamicLine, this, length, margin);
         viewPager.addOnPageChangeListener(onPageChangeListener);
 
+    }
+
+    private int getFixLeftDis() {
+        TextView textView = new TextView(getContext());
+        textView.setTextSize(defaultTextSize);
+        textView.setText(titles[0]);
+        float defaultTextSize = getTextViewLength(textView);
+        textView.setTextSize(selectedTextSize);
+        float selectTextSize = getTextViewLength(textView);
+        return (int)(selectTextSize - defaultTextSize) / 2;
     }
 
     public ArrayList<TextView> getTextView() {
@@ -108,7 +121,6 @@ public class ViewPagerTitle extends HorizontalScrollView {
             textView.setTag(i);
             textViews.add(textView);
             textViewLl.addView(textView);
-            length = length + textViewParams.leftMargin + (int) getTextViewLength(textView) + textViewParams.rightMargin;
         }
         contentLl.addView(textViewLl);
         contentLl.addView(dynamicLine);
@@ -128,8 +140,10 @@ public class ViewPagerTitle extends HorizontalScrollView {
         int screenWidth = getScreenWidth(getContext());
 
         if (countLength <= screenWidth) {
-            return (screenWidth / titles.length - (int) paint.measureText(titles[1])) / 2;
+            allTextViewLength = screenWidth;
+            return (screenWidth / titles.length - (int) paint.measureText(titles[0])) / 2;
         } else {
+            allTextViewLength = (int) countLength;
             return defaultMargins;
         }
     }
@@ -138,15 +152,7 @@ public class ViewPagerTitle extends HorizontalScrollView {
     private OnClickListener onClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            for (int i = 0; i < textViews.size(); i++) {
-                if (i == (int) v.getTag()) {
-                    ((TextView) v).setTextColor(selectedTextColor);
-                    ((TextView) v).setTextSize(selectedTextSize);
-                } else {
-                    textViews.get(i).setTextColor(defaultTextColor);
-                    textViews.get(i).setTextSize(defaultTextSize);
-                }
-            }
+            setCurrentItem((int) v.getTag());
             viewPager.setCurrentItem((int) v.getTag());
             if (onTextViewClick != null) {
                 onTextViewClick.textViewClick((TextView) v, (int) v.getTag());

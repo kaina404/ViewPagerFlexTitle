@@ -19,6 +19,7 @@ public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
     private static final String TAG = "test_tag";
     private final Context context;
+    private int fixLeftDis;
     private ArrayList<TextView> textViews;
     private ViewPagerTitle viewPagerTitle;
     private DynamicLine dynamicLine;
@@ -33,7 +34,7 @@ public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
     private int[] location = new int[2];
 
 
-    public MyOnPageChangeListener(Context context, ViewPager viewPager, DynamicLine dynamicLine, ViewPagerTitle viewPagerTitle, int allLength, int margin) {
+    public MyOnPageChangeListener(Context context, ViewPager viewPager, DynamicLine dynamicLine, ViewPagerTitle viewPagerTitle, int allLength, int margin, int fixLeftDis) {
         this.viewPagerTitle = viewPagerTitle;
         this.pager = viewPager;
         this.dynamicLine = dynamicLine;
@@ -46,7 +47,7 @@ public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
         everyLength = allLength / pagerCount;
         dis = margin;
-
+        this.fixLeftDis = fixLeftDis;
     }
 
 
@@ -56,7 +57,7 @@ public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
         if (lastPosition > position) {
             Log.d(TAG, "lastPosition < position positionOffset = " + positionOffset + "][position=" + position + "][ locationtm 0 = ");
 
-            dynamicLine.updateView((position + positionOffset) * everyLength + dis, (lastPosition + 1) * everyLength - dis);
+            dynamicLine.updateView((position + positionOffset) * everyLength + dis + fixLeftDis, (lastPosition + 1) * everyLength - dis);
 
 
         } else {
@@ -64,7 +65,7 @@ public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
             if (positionOffset > 0.5f) {
                 positionOffset = 0.5f;
             }
-            dynamicLine.updateView(lastPosition * everyLength + dis, (position + positionOffset * 2) * everyLength + dis + lineWidth);
+            dynamicLine.updateView(lastPosition * everyLength + dis + fixLeftDis, (position + positionOffset * 2) * everyLength + dis + lineWidth);
 
         }
 
