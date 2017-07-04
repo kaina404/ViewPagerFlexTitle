@@ -32,10 +32,8 @@ public class ViewPagerTitle extends HorizontalScrollView {
     private int margin;
     private LinearLayout.LayoutParams contentParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     private LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-    //    private int length;
-    private int defaultIndex;
     private float defaultTextSize = 18;
-    private float selectedTextSize = 25;
+    private float selectedTextSize = 22;
     private int defaultTextColor = Color.GRAY;
     private int selectedTextColor = Color.BLACK;
     private int allTextViewLength;
@@ -97,6 +95,7 @@ public class ViewPagerTitle extends HorizontalScrollView {
 
     private void createTextViews(String[] titles) {
         LinearLayout contentLl = new LinearLayout(getContext());
+        contentLl.setBackgroundColor(Color.parseColor("#fffacd"));
         contentLl.setLayoutParams(contentParams);
         contentLl.setOrientation(LinearLayout.VERTICAL);
         addView(contentLl);
@@ -162,7 +161,6 @@ public class ViewPagerTitle extends HorizontalScrollView {
     };
 
     public void setDefaultIndex(int index) {
-        this.defaultIndex = index;
         setCurrentItem(index);
     }
 
