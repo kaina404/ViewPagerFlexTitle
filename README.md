@@ -1,7 +1,7 @@
 # WeiboLine
 仿微博viewpager动态导航条，支持伸缩动画，支持滑动，渐变导航条颜色。
 
-Tips:
+Tips:</br>
         background_content_color" // 设置导航条背景颜色</br>
         defaultTextViewColor"     // 导航条字体默认颜色</br>
         selectedTextViewColor"    //导航条字体选中颜色</br>
