@@ -8,6 +8,9 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import xu.viewpagerflextitle.MyPagerAdapter;
+import xu.viewpagerflextitle.ViewPagerTitle;
+
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager pager;

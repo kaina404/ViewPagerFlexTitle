@@ -6,51 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <xu.weiboline.ViewPagerTitle
+    <xu.viewpagerflextitle.ViewPagerTitle
         android:id="@+id/pager_title"
-        ViewPagerTitle:background_content_color="@android:color/holo_purple"
+        ViewPagerTitle:background_content_color="@android:color/white"
         ViewPagerTitle:line_start_color="@android:color/holo_red_dark"
         ViewPagerTitle:line_end_color="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></xu.weiboline.ViewPagerTitle>
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"/>
 
-        <TextView
-            android:text="layoutA"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="layoutB"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="layoutC"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>-->
-
-
-
-  <!--  <xu.weiboline.DynamicLine
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />-->
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
