@@ -6,9 +6,6 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-/**
- * Created by lovexujh on 2017/6/30
- */
 
 public class MyPagerAdapter extends PagerAdapter {
 

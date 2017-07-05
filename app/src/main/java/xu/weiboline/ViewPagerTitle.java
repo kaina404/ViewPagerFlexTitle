@@ -1,6 +1,7 @@
 package xu.weiboline;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.text.TextPaint;
@@ -17,9 +18,6 @@ import java.util.ArrayList;
 import static xu.weiboline.Tool.getScreenWidth;
 import static xu.weiboline.Tool.getTextViewLength;
 
-/**
- * Created by lovexujh on 2017/7/3
- */
 
 public class ViewPagerTitle extends HorizontalScrollView {
 
@@ -32,11 +30,13 @@ public class ViewPagerTitle extends HorizontalScrollView {
     private int margin;
     private LinearLayout.LayoutParams contentParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     private LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-    private float defaultTextSize = 18;
-    private float selectedTextSize = 22;
-    private int defaultTextColor = Color.GRAY;
-    private int selectedTextColor = Color.BLACK;
+    private float defaultTextSize;
+    private float selectedTextSize;
+    private int defaultTextColor;
+    private int selectedTextColor;
     private int allTextViewLength;
+    private int backgroundColor;
+    private float itemMargins;
 
 
     public ViewPagerTitle(Context context) {
@@ -49,7 +49,19 @@ public class ViewPagerTitle extends HorizontalScrollView {
 
     public ViewPagerTitle(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initAttributeSet(context, attrs);
         init();
+    }
+
+    private void initAttributeSet(Context context, AttributeSet attrs) {
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.ViewPagerTitle);
+        defaultTextColor = array.getColor(R.styleable.ViewPagerTitle_defaultTextViewColor, Color.GRAY);
+        selectedTextColor = array.getColor(R.styleable.ViewPagerTitle_selectedTextViewColor, Color.BLACK);
+        defaultTextSize = array.getDimension(R.styleable.ViewPagerTitle_defaultTextViewSize, 18);
+        selectedTextSize = array.getDimension(R.styleable.ViewPagerTitle_defaultTextViewSize, 22);
+        backgroundColor = array.getColor(R.styleable.ViewPagerTitle_background_content_color, Color.WHITE);
+        itemMargins = array.getDimension(R.styleable.ViewPagerTitle_item_margins, 30);
+        array.recycle();
     }
 
     private void init() {
@@ -78,7 +90,7 @@ public class ViewPagerTitle extends HorizontalScrollView {
         float defaultTextSize = getTextViewLength(textView);
         textView.setTextSize(selectedTextSize);
         float selectTextSize = getTextViewLength(textView);
-        return (int)(selectTextSize - defaultTextSize) / 2;
+        return (int) (selectTextSize - defaultTextSize) / 2;
     }
 
     public ArrayList<TextView> getTextView() {
@@ -95,7 +107,7 @@ public class ViewPagerTitle extends HorizontalScrollView {
 
     private void createTextViews(String[] titles) {
         LinearLayout contentLl = new LinearLayout(getContext());
-        contentLl.setBackgroundColor(Color.parseColor("#fffacd"));
+        contentLl.setBackgroundColor(backgroundColor);
         contentLl.setLayoutParams(contentParams);
         contentLl.setOrientation(LinearLayout.VERTICAL);
         addView(contentLl);
@@ -126,7 +138,6 @@ public class ViewPagerTitle extends HorizontalScrollView {
     }
 
     private int getTextViewMargins(String[] titles) {
-        int defaultMargins = 30;
         float countLength = 0;
         TextView textView = new TextView(getContext());
         textView.setTextSize(defaultTextSize);
@@ -134,7 +145,7 @@ public class ViewPagerTitle extends HorizontalScrollView {
 
 
         for (int i = 0; i < titles.length; i++) {
-            countLength = countLength + defaultMargins + paint.measureText(titles[i]) + defaultMargins;
+            countLength = countLength + itemMargins + paint.measureText(titles[i]) + itemMargins;
         }
         int screenWidth = getScreenWidth(getContext());
 
@@ -143,7 +154,7 @@ public class ViewPagerTitle extends HorizontalScrollView {
             return (screenWidth / titles.length - (int) paint.measureText(titles[0])) / 2;
         } else {
             allTextViewLength = (int) countLength;
-            return defaultMargins;
+            return (int) itemMargins;
         }
     }
 

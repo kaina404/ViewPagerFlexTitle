@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ViewPagerTitle="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="xu.weiboline.MainActivity">
+    android:orientation="vertical">
 
     <xu.weiboline.ViewPagerTitle
         android:id="@+id/pager_title"
+        ViewPagerTitle:background_content_color="@android:color/holo_purple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></xu.weiboline.ViewPagerTitle>
     <!--<LinearLayout

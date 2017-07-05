@@ -6,11 +6,6 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-
-/**
- * Created by lovexujh on 2017/7/4
- */
-
 public class Tool {
 
     public static float getTextViewLength(TextView textView) {

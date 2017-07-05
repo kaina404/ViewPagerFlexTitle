@@ -11,9 +11,6 @@ import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
 import static xu.weiboline.Tool.getScreenWidth;
 import static xu.weiboline.Tool.getTextViewLength;
 
-/**
- * Created by lovexujh on 2017/6/30
- */
 
 public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
@@ -55,13 +52,10 @@ public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
         if (lastPosition > position) {
-            Log.d(TAG, "lastPosition < position positionOffset = " + positionOffset + "][position=" + position + "][ locationtm 0 = ");
-
             dynamicLine.updateView((position + positionOffset) * everyLength + dis + fixLeftDis, (lastPosition + 1) * everyLength - dis);
 
 
         } else {
-            Log.d(TAG, "lastPosition >= position positionOffset = " + positionOffset + "][position=" + position);
             if (positionOffset > 0.5f) {
                 positionOffset = 0.5f;
             }

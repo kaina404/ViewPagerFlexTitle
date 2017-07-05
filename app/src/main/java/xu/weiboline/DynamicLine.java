@@ -1,6 +1,7 @@
 package xu.weiboline;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
@@ -12,11 +13,11 @@ import android.view.View;
 
 import static xu.weiboline.Tool.getScreenWidth;
 
-/**
- * Created by lovexujh on 2017/6/30
- */
 
 public class DynamicLine extends View {
+    private int lineHeight;
+    private int shaderColorEnd;
+    private int shaderColorStart;
     private float startX, stopX;
     private Paint paint;
     private RectF rectF = new RectF(startX, 0, stopX, 0);
@@ -32,6 +33,12 @@ public class DynamicLine extends View {
 
     public DynamicLine(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.ViewPagerTitle);
+
+        shaderColorStart = array.getColor(R.styleable.ViewPagerTitle_line_start_color, Color.parseColor("#ffc125"));
+        shaderColorEnd = array.getColor(R.styleable.ViewPagerTitle_line_end_color, Color.parseColor("#ff4500"));
+        lineHeight = array.getInteger(R.styleable.ViewPagerTitle_line_height, 20);
+        array.recycle();
         init();
     }
 
@@ -40,13 +47,13 @@ public class DynamicLine extends View {
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(5);
-        paint.setShader(new LinearGradient(0, 100, getScreenWidth(getContext()), 100, Color.parseColor("#ffc125"), Color.parseColor("#ff4500"), Shader.TileMode.MIRROR));
+        paint.setShader(new LinearGradient(0, 100, getScreenWidth(getContext()), 100, shaderColorStart, shaderColorEnd, Shader.TileMode.MIRROR));
     }
 
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        heightMeasureSpec = MeasureSpec.makeMeasureSpec(20, MeasureSpec.getMode(heightMeasureSpec));
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec(lineHeight, MeasureSpec.getMode(heightMeasureSpec));
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
