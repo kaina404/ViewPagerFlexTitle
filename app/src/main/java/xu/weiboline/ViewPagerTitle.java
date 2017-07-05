@@ -37,6 +37,9 @@ public class ViewPagerTitle extends HorizontalScrollView {
     private int allTextViewLength;
     private int backgroundColor;
     private float itemMargins;
+    private int shaderColorStart;
+    private int shaderColorEnd;
+    private int lineHeight;
 
 
     public ViewPagerTitle(Context context) {
@@ -61,6 +64,11 @@ public class ViewPagerTitle extends HorizontalScrollView {
         selectedTextSize = array.getDimension(R.styleable.ViewPagerTitle_defaultTextViewSize, 22);
         backgroundColor = array.getColor(R.styleable.ViewPagerTitle_background_content_color, Color.WHITE);
         itemMargins = array.getDimension(R.styleable.ViewPagerTitle_item_margins, 30);
+
+        shaderColorStart = array.getColor(R.styleable.ViewPagerTitle_line_start_color, Color.parseColor("#ffc125"));
+        shaderColorEnd = array.getColor(R.styleable.ViewPagerTitle_line_end_color, Color.parseColor("#ff4500"));
+        lineHeight = array.getInteger(R.styleable.ViewPagerTitle_line_height, 20);
+
         array.recycle();
     }
 
@@ -100,7 +108,7 @@ public class ViewPagerTitle extends HorizontalScrollView {
 
     private void createDynamicLine() {
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dynamicLine = new DynamicLine(getContext());
+        dynamicLine = new DynamicLine(getContext(), shaderColorStart, shaderColorEnd, lineHeight);
         dynamicLine.setLayoutParams(params);
     }
 

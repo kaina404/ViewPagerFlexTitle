@@ -1,9 +1,7 @@
 package xu.weiboline;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
@@ -23,8 +21,13 @@ public class DynamicLine extends View {
     private RectF rectF = new RectF(startX, 0, stopX, 0);
 
 
-    public DynamicLine(Context context) {
+    public DynamicLine(Context context, int shaderColorStart1, int shaderColorEnd1, int lineHeight1) {
         this(context, null);
+        shaderColorStart = shaderColorStart1;
+        shaderColorEnd = shaderColorEnd1;
+        lineHeight = lineHeight1;
+        init();
+
     }
 
     public DynamicLine(Context context, AttributeSet attrs) {
@@ -33,13 +36,6 @@ public class DynamicLine extends View {
 
     public DynamicLine(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.ViewPagerTitle);
-
-        shaderColorStart = array.getColor(R.styleable.ViewPagerTitle_line_start_color, Color.parseColor("#ffc125"));
-        shaderColorEnd = array.getColor(R.styleable.ViewPagerTitle_line_end_color, Color.parseColor("#ff4500"));
-        lineHeight = array.getInteger(R.styleable.ViewPagerTitle_line_height, 20);
-        array.recycle();
-        init();
     }
 
     private void init() {

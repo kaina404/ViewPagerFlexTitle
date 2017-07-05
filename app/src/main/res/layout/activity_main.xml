@@ -9,6 +9,8 @@
     <xu.weiboline.ViewPagerTitle
         android:id="@+id/pager_title"
         ViewPagerTitle:background_content_color="@android:color/holo_purple"
+        ViewPagerTitle:line_start_color="@android:color/holo_red_dark"
+        ViewPagerTitle:line_end_color="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></xu.weiboline.ViewPagerTitle>
     <!--<LinearLayout
