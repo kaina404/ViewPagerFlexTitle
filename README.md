@@ -14,9 +14,11 @@
 
 
 </br>
-# Gradle via JCenter
-</br>
-> compile 'com.xu.viewpagerflextitle:viewpagerflextitle:1.0.3'
-</br>
+## Gradle via JCenter
+
+``` groovy
+compile 'com.xu.viewpagerflextitle:viewpagerflextitle:1.0.3'
+```
+
 ![demo1](https://github.com/xujianhui404/WeiboLine/blob/dev-1.0/demo.gif)
 ![demo2](https://github.com/xujianhui404/WeiboLine/blob/dev-1.0/demo2.gif)
