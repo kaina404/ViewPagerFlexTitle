@@ -1,7 +1,7 @@
 # WeiboLine
 仿微博viewpager动态导航条，支持伸缩动画，支持滑动，渐变导航条颜色。</br>
 
-#Tips:</br>
+# Tips:</br>
         background_content_color" // 设置导航条背景颜色</br></br>
         defaultTextViewColor"     // 导航条字体默认颜色</br></br>
         selectedTextViewColor"    //导航条字体选中颜色</br></br>
@@ -12,5 +12,11 @@
         line_end_color"   //导航条线的渐变中止色</br></br>
         line_height"     // 导航条线的高度</br></br>
 
+
+</br>
+# Gradle via JCenter
+</br>
+> compile 'com.xu.viewpagerflextitle:viewpagerflextitle:1.0.3'
+</br>
 ![demo1](https://github.com/xujianhui404/WeiboLine/blob/dev-1.0/demo.gif)
 ![demo2](https://github.com/xujianhui404/WeiboLine/blob/dev-1.0/demo2.gif)
